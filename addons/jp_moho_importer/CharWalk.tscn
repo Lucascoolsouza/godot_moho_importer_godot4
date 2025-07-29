@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ddxxkconcvj1t" path="res://addons/jp_moho_importer/components/godot-icon_mask.png" id="5_a0c8x"]
 [ext_resource type="Material" path="res://addons/jp_moho_importer/components/canvas_item_light_only_material.tres" id="6_qovwn"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_67dg5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gy6qh"]
 _data = {
 &"CharWalk": ExtResource("1_bvhoa")
 }
@@ -17,7 +17,7 @@ position = Vector2(216, 216)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_67dg5")
+&"": SubResource("AnimationLibrary_gy6qh")
 }
 
 [node name="CharRig" type="Skeleton2D" parent="."]
