@@ -349,6 +349,6 @@ func _parse_reparenting_animation(
 				
 				animation.track_insert_key(track_idx, time, is_active)
 				if verbose:
-					print("| | Added keyframe at %0.2fs : %s" % [time, is_active])
+					print("| | Added keyframe at %0.2fs for parent_idx %s, key_parent_idx %s, is_active %s" % [time, parent_idx, key_parent_idx, is_active])
 
 ### -----------------------------------------------------------------------------------------------
