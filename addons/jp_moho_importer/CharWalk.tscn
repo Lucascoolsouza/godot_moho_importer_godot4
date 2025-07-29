@@ -1,0 +1,410 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgjje6b5s5yqg"]
+
+[ext_resource type="Animation" uid="uid://7g3fqiycn3bc" path="res://addons/jp_moho_importer/charwalk_anim.tres" id="1_bvhoa"]
+[ext_resource type="Script" uid="uid://oiwfpvhm2vev" path="res://addons/jp_moho_importer/classes/skeleton2d_ik/Skeleton2DIK.gd" id="2_67dg5"]
+[ext_resource type="Script" uid="uid://dnbqmfgeuhjlj" path="res://addons/jp_moho_importer/classes/smart_bones/SmartBone.gd" id="3_b3j28"]
+[ext_resource type="Texture2D" uid="uid://bqqoikfrlkj6s" path="res://addons/jp_moho_importer/components/godot-icon.png" id="4_0saev"]
+[ext_resource type="Texture2D" uid="uid://ddxxkconcvj1t" path="res://addons/jp_moho_importer/components/godot-icon_mask.png" id="5_a0c8x"]
+[ext_resource type="Material" path="res://addons/jp_moho_importer/components/canvas_item_light_only_material.tres" id="6_qovwn"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67dg5"]
+_data = {
+&"CharWalk": ExtResource("1_bvhoa")
+}
+
+[node name="CharWalk" type="Node2D"]
+position = Vector2(216, 216)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_67dg5")
+}
+
+[node name="CharRig" type="Skeleton2D" parent="."]
+
+[node name="CG" type="Bone2D" parent="CharRig"]
+position = Vector2(25.0942, 62.7798)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 25.0942, 62.7798)
+
+[node name="Body" type="Bone2D" parent="CharRig/CG"]
+rotation = -1.5708
+rest = Transform2D(3.13916e-07, -1, 1, 3.13916e-07, 0, 0)
+
+[node name="Head" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(46.1832, 8.29937)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 46.1832, 8.29937)
+
+[node name="HeadGroupRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/Head"]
+remote_path = NodePath("../../../../../CharRig_Layers/HeadGroup")
+
+[node name="ArmUpperR" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(37.2777, 14.7422)
+rotation = -3.14159
+rest = Transform2D(-1, 3.25841e-07, -3.25841e-07, -1, 37.2777, 14.7422)
+metadata/_edit_ik_ = true
+metadata/_edit_bone_ = true
+
+[node name="ArmLowerR" type="Bone2D" parent="CharRig/CG/Body/ArmUpperR"]
+position = Vector2(18.4699, 0)
+rest = Transform2D(1, 0, 0, 1, 18.4699, 0)
+metadata/_edit_bone_ = true
+
+[node name="Hand" type="Bone2D" parent="CharRig/CG/Body/ArmUpperR/ArmLowerR"]
+position = Vector2(16.0957, 0)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 16.0957, 0)
+metadata/_edit_bone_ = true
+
+[node name="HandLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperR/ArmLowerR/Hand"]
+remote_path = NodePath("../../../../../../../CharRig_Layers/HandLAnchor")
+
+[node name="LowerArmLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperR/ArmLowerR"]
+remote_path = NodePath("../../../../../../CharRig_Layers/LowerArmLAnchor")
+
+[node name="UpperArmLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperR"]
+remote_path = NodePath("../../../../../CharRig_Layers/UpperArmLAnchor")
+
+[node name="LegUpperR" type="Bone2D" parent="CharRig/CG/Body"]
+rotation = -3.14159
+rest = Transform2D(-1, 3.25841e-07, -3.25841e-07, -1, 0, 0)
+metadata/_edit_ik_ = true
+metadata/_edit_bone_ = true
+
+[node name="LegLowerR" type="Bone2D" parent="CharRig/CG/Body/LegUpperR"]
+position = Vector2(21.9024, 0)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 21.9024, 0)
+metadata/_edit_bone_ = true
+
+[node name="LegLowerRIK" type="Node2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR"]
+position = Vector2(22.8681, 0)
+script = ExtResource("2_67dg5")
+target_node_path = NodePath("../../../../../LegTargetR")
+root_path = NodePath("../..")
+
+[node name="B24" type="Bone2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR"]
+position = Vector2(22.8681, 0)
+rotation = -1.5708
+rest = Transform2D(-1.71264e-06, -1, 1, -1.71264e-06, 22.8681, 0)
+script = ExtResource("3_b3j28")
+independent_angle = true
+parent_rest_angle = 1.5708
+metadata/_edit_bone_ = true
+
+[node name="HeelR" type="Bone2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR/B24"]
+position = Vector2(-2.08051, -0.102384)
+rotation = -3.14159
+rest = Transform2D(-1, -1.58151e-06, 1.58151e-06, -1, -2.08051, -0.102384)
+metadata/_edit_bone_ = true
+
+[node name="ToesR" type="Bone2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR/B24/HeelR"]
+position = Vector2(10.2326, 0.02268)
+rest = Transform2D(1, 0, 0, 1, 10.2326, 0.02268)
+metadata/_edit_bone_ = true
+
+[node name="ToesLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR/B24/HeelR/ToesR"]
+remote_path = NodePath("../../../../../../../../../CharRig_Layers/ToesLAnchor")
+
+[node name="FootLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR/B24/HeelR"]
+remote_path = NodePath("../../../../../../../../CharRig_Layers/FootLAnchor")
+
+[node name="LowerLegLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperR/LegLowerR"]
+remote_path = NodePath("../../../../../../CharRig_Layers/LowerLegLAnchor")
+
+[node name="UpperLegLRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperR"]
+remote_path = NodePath("../../../../../CharRig_Layers/UpperLegLAnchor")
+
+[node name="ArmUpperL" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(37.2777, -15.9056)
+rotation = -3.14159
+rest = Transform2D(-1, 3.25841e-07, -3.25841e-07, -1, 37.2777, -15.9056)
+metadata/_edit_ik_ = true
+metadata/_edit_bone_ = true
+
+[node name="ArmLowerL" type="Bone2D" parent="CharRig/CG/Body/ArmUpperL"]
+position = Vector2(18.4699, 0)
+rest = Transform2D(1, 0, 0, 1, 18.4699, 0)
+metadata/_edit_bone_ = true
+
+[node name="HandL" type="Bone2D" parent="CharRig/CG/Body/ArmUpperL/ArmLowerL"]
+position = Vector2(16.0957, 0)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 16.0957, 0)
+metadata/_edit_bone_ = true
+
+[node name="HandRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperL/ArmLowerL/HandL"]
+remote_path = NodePath("../../../../../../../CharRig_Layers/HandRAnchor")
+
+[node name="LowerArmRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperL/ArmLowerL"]
+remote_path = NodePath("../../../../../../CharRig_Layers/LowerArmRAnchor")
+
+[node name="UpperArmRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/ArmUpperL"]
+remote_path = NodePath("../../../../../CharRig_Layers/UpperArmRAnchor")
+
+[node name="LegUpperL" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(0, -25.0322)
+rotation = -3.14159
+rest = Transform2D(-1, 3.25841e-07, -3.25841e-07, -1, 0, -25.0322)
+metadata/_edit_ik_ = true
+metadata/_edit_bone_ = true
+
+[node name="LegLowerL" type="Bone2D" parent="CharRig/CG/Body/LegUpperL"]
+position = Vector2(21.9024, 0)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 21.9024, 0)
+metadata/_edit_bone_ = true
+
+[node name="LegLowerLIK" type="Node2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL"]
+position = Vector2(22.8744, 0)
+script = ExtResource("2_67dg5")
+target_node_path = NodePath("../../../../../LegTargetL")
+root_path = NodePath("../..")
+
+[node name="B25" type="Bone2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL"]
+position = Vector2(22.8744, 0)
+rotation = -1.5708
+rest = Transform2D(3.13916e-07, -1, 1, 3.13916e-07, 22.8744, 0)
+script = ExtResource("3_b3j28")
+independent_angle = true
+parent_rest_angle = 1.5708
+metadata/_edit_bone_ = true
+
+[node name="HeelL" type="Bone2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL/B25"]
+position = Vector2(-2.08051, 0.056808)
+rotation = -3.14159
+rest = Transform2D(-1, 3.25841e-07, -3.25841e-07, -1, -2.08051, 0.056808)
+metadata/_edit_bone_ = true
+
+[node name="ToesL" type="Bone2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL/B25/HeelL"]
+position = Vector2(10.2326, 0.02268)
+rest = Transform2D(1, 0, 0, 1, 10.2326, 0.02268)
+metadata/_edit_bone_ = true
+
+[node name="ToesRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL/B25/HeelL/ToesL"]
+remote_path = NodePath("../../../../../../../../../CharRig_Layers/ToesRAnchor")
+
+[node name="FootRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL/B25/HeelL"]
+remote_path = NodePath("../../../../../../../../CharRig_Layers/FootRAnchor")
+
+[node name="LowerLegRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperL/LegLowerL"]
+remote_path = NodePath("../../../../../../CharRig_Layers/LowerLegRAnchor")
+
+[node name="UpperLegRRemote" type="RemoteTransform2D" parent="CharRig/CG/Body/LegUpperL"]
+remote_path = NodePath("../../../../../CharRig_Layers/UpperLegRAnchor")
+
+[node name="Eyes_LR" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(151.876, 69.012)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 151.876, 69.012)
+script = ExtResource("3_b3j28")
+max_constraint = -5.75959
+min_constraint = -6.80678
+
+[node name="Eyes_UD" type="Bone2D" parent="CharRig/CG/Body"]
+position = Vector2(153.21, 107.171)
+rotation = -6.28319
+rest = Transform2D(1, 3.01992e-07, -3.01992e-07, 1, 153.21, 107.171)
+script = ExtResource("3_b3j28")
+max_constraint = -5.75959
+min_constraint = -6.80678
+
+[node name="BodyRemote" type="RemoteTransform2D" parent="CharRig/CG/Body"]
+remote_path = NodePath("../../../../CharRig_Layers/BodyAnchor")
+
+[node name="LegTargetR" type="Bone2D" parent="CharRig"]
+position = Vector2(25.0942, 107.55)
+rotation = -4.71239
+rest = Transform2D(1.19249e-08, 1, -1, 1.19249e-08, 25.0942, 107.55)
+
+[node name="LegTargetL" type="Bone2D" parent="CharRig"]
+position = Vector2(0.061992, 107.557)
+rotation = -4.71239
+rest = Transform2D(1.19249e-08, 1, -1, 1.19249e-08, 0.061992, 107.557)
+
+[node name="CharRig_Layers" type="Node2D" parent="."]
+
+[node name="UpperArmRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(9.18867, 25.502)
+rotation = 1.5708
+
+[node name="UpperArmR" type="Sprite2D" parent="CharRig_Layers/UpperArmRAnchor"]
+position = Vector2(-25.502, 9.18869)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(9.54461, 33.7559)
+
+[node name="LowerArmRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(9.18867, 43.972)
+rotation = 1.5708
+
+[node name="LowerArmR" type="Sprite2D" parent="CharRig_Layers/LowerArmRAnchor"]
+position = Vector2(-43.972, 9.18869)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(9.58463, 51.945)
+
+[node name="HandRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(9.18867, 60.0677)
+rotation = 1.5708
+
+[node name="HandR" type="Sprite2D" parent="CharRig_Layers/HandRAnchor"]
+position = Vector2(-60.0677, 9.18872)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(9.03153, 77.6815)
+
+[node name="UpperLegRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(0.0619965, 62.7797)
+rotation = 1.5708
+
+[node name="UpperLegR" type="Sprite2D" parent="CharRig_Layers/UpperLegRAnchor"]
+position = Vector2(-62.7797, 0.0620117)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(0.724473, 70.6433)
+
+[node name="LowerLegRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(0.0619965, 84.6821)
+rotation = 1.5708
+
+[node name="LowerLegR" type="Sprite2D" parent="CharRig_Layers/LowerLegRAnchor"]
+position = Vector2(-84.6821, 0.0620575)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(-0.702025, 94.2236)
+
+[node name="FootRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(-2.01852, 107.613)
+rotation = -3.14159
+
+[node name="FootR" type="Sprite2D" parent="CharRig_Layers/FootRAnchor"]
+position = Vector2(-2.01845, 107.613)
+rotation = 3.14159
+texture = ExtResource("4_0saev")
+offset = Vector2(1.18879, 106.255)
+
+[node name="ToesRAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(-12.2511, 107.591)
+rotation = -3.14159
+
+[node name="ToesR" type="Sprite2D" parent="CharRig_Layers/ToesRAnchor"]
+position = Vector2(-12.251, 107.591)
+rotation = 3.14159
+texture = ExtResource("4_0saev")
+offset = Vector2(-25.1907, 106.416)
+
+[node name="BodyAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(25.0942, 62.7798)
+rotation = -1.5708
+
+[node name="Body" type="Sprite2D" parent="CharRig_Layers/BodyAnchor"]
+position = Vector2(62.7797, -25.0943)
+rotation = 1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(8.94195, 35.4665)
+
+[node name="HeadGroup" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(33.3936, 16.5966)
+rotation = -1.5708
+
+[node name="HeadAnchor" type="Node2D" parent="CharRig_Layers/HeadGroup"]
+position = Vector2(16.5966, -33.3936)
+rotation = 1.5708
+
+[node name="Head" type="Sprite2D" parent="CharRig_Layers/HeadGroup/HeadAnchor"]
+texture = ExtResource("4_0saev")
+offset = Vector2(10.2097, -38.3007)
+
+[node name="Eyes" type="Node2D" parent="CharRig_Layers/HeadGroup"]
+position = Vector2(16.5966, -33.3936)
+rotation = 1.5708
+
+[node name="EyesAnchor" type="Node2D" parent="CharRig_Layers/HeadGroup/Eyes"]
+
+[node name="Eyes" type="Sprite2D" parent="CharRig_Layers/HeadGroup/Eyes/EyesAnchor"]
+texture = ExtResource("4_0saev")
+offset = Vector2(31.2363, -38.9996)
+
+[node name="EyesMask" type="PointLight2D" parent="CharRig_Layers/HeadGroup/Eyes/EyesAnchor/Eyes"]
+blend_mode = 2
+texture = ExtResource("5_a0c8x")
+offset = Vector2(31.2363, -38.9996)
+
+[node name="PupilAnchor" type="Node2D" parent="CharRig_Layers/HeadGroup/Eyes"]
+
+[node name="Pupil" type="Sprite2D" parent="CharRig_Layers/HeadGroup/Eyes/PupilAnchor"]
+material = ExtResource("6_qovwn")
+texture = ExtResource("4_0saev")
+offset = Vector2(25.3323, -38.7123)
+
+[node name="UpperLegLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(25.0942, 62.7798)
+rotation = 1.5708
+
+[node name="UpperLegL" type="Sprite2D" parent="CharRig_Layers/UpperLegLAnchor"]
+position = Vector2(-62.7798, 25.0943)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(26.3479, 70.6433)
+
+[node name="LowerLegLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(25.0942, 84.6822)
+rotation = 1.5708
+
+[node name="LowerLegL" type="Sprite2D" parent="CharRig_Layers/LowerLegLAnchor"]
+position = Vector2(-84.6821, 25.0943)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(25.396, 94.2236)
+
+[node name="FootLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(23.0137, 107.448)
+rotation = -3.14159
+
+[node name="FootL" type="Sprite2D" parent="CharRig_Layers/FootLAnchor"]
+position = Vector2(23.0138, 107.448)
+rotation = 3.14159
+texture = ExtResource("4_0saev")
+offset = Vector2(28.1295, 106.318)
+
+[node name="ToesLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(12.7811, 107.425)
+rotation = -3.14159
+
+[node name="ToesL" type="Sprite2D" parent="CharRig_Layers/ToesLAnchor"]
+position = Vector2(12.7812, 107.425)
+rotation = 3.14159
+texture = ExtResource("4_0saev")
+offset = Vector2(2.72249, 106.634)
+
+[node name="UpperArmLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(39.8365, 25.502)
+rotation = 1.5708
+
+[node name="UpperArmL" type="Sprite2D" parent="CharRig_Layers/UpperArmLAnchor"]
+position = Vector2(-25.502, 39.8365)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(39.7345, 33.7559)
+
+[node name="LowerArmLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(39.8365, 43.972)
+rotation = 1.5708
+
+[node name="LowerArmL" type="Sprite2D" parent="CharRig_Layers/LowerArmLAnchor"]
+position = Vector2(-43.972, 39.8365)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(40.3497, 51.945)
+
+[node name="HandLAnchor" type="Node2D" parent="CharRig_Layers"]
+position = Vector2(39.8365, 60.0677)
+rotation = 1.5708
+
+[node name="HandL" type="Sprite2D" parent="CharRig_Layers/HandLAnchor"]
+position = Vector2(-60.0676, 39.8365)
+rotation = -1.5708
+texture = ExtResource("4_0saev")
+offset = Vector2(39.7966, 77.6815)

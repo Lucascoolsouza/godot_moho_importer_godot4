@@ -1,0 +1,4 @@
+res://default_env.tres
+res://addons/jp_moho_importer/CharWalk.tscn
+res://addons/jp_moho_importer/components/moho_inspector_plugin_theme.tres
+res://addons/jp_moho_importer/moho_importer_plugin.gd

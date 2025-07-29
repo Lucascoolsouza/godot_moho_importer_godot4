@@ -1,0 +1,21 @@
+[remap]
+
+importer="jp_moho_importer"
+type="PackedScene"
+uid="uid://danyl8o7t5sks"
+
+[deps]
+
+files=["res://addons/jp_moho_importer/components/godot-icon_mask.png", "res://addons/jp_moho_importer/charwalk_anim.tres", "res://addons/jp_moho_importer/CharWalk.tscn"]
+
+source_file="res://addons/jp_moho_importer/CharWalk.mohoproj"
+dest_files=["res://addons/jp_moho_importer/components/godot-icon_mask.png", "res://addons/jp_moho_importer/charwalk_anim.tres", "res://addons/jp_moho_importer/CharWalk.tscn"]
+
+[params]
+
+loop_animation=false
+image_folder=""
+mask_layer=1
+ik_preference="None"
+save_shapes_as_curves=false
+verbose=false
